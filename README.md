@@ -17,8 +17,9 @@ Then drag the `.json` or the `.png` onto the ComfyUI canvas.
 
 | Date | Video | Workflows | Models |
 |---|---|---|---|
-| 2026-11 | Draw boxes, get the picture: layout control in ComfyUI ([YouTube](https://youtu.be/-iY5BTYSgxU?si=oMUTC6zle4d26N5G)) | [2611-layout-boxes](2611-layout-boxes) | FLUX 3 Image Klein, MOSS-Image |
+| 2026-11 | Draw boxes, get the picture: layout control in ComfyUI ([YouTube](https://youtu.be/-iY5BTYSgxU)) | [2611-layout-boxes](2611-layout-boxes) | FLUX 3 Image Klein, MOSS-Image |
 | 2026-11 | This AI image model proofreads itself: SenseNova U1.6 in ComfyUI ([YouTube](https://youtu.be/c_WvoYA_Y5k)) | [2611-sensenova](2611-sensenova) | SenseNova U1.6 |
+| 2026-11 | 5 MiniMax H3 Image Tips You Need to Know (Tested & Explained in ComfyUI) ([YouTube](https://youtu.be/iJ4EWYyxYuA)) | [2611-minimax-h3](2611-minimax-h3) | MiniMax H3 Image |
 
 Each folder says which ComfyUI version it was made on. If a node shows a red outline, update ComfyUI first.
 

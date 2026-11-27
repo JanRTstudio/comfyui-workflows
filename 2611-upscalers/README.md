@@ -1,6 +1,6 @@
 # Three one-step upscalers in ComfyUI: Kandinsky ImageSR 2.0, Steppe, SeedVR2
 
-Workflows from the JanRT Studio video ([watch on YouTube](YOUTUBE_LINK)), set up the way the video's live demo ends, each with a how-to note on the canvas.
+Workflows from the JanRT Studio video ([watch on YouTube](https://youtu.be/dkIuGegSpNw)), set up the way the video's live demo ends, each with a how-to note on the canvas.
 
 | File | What |
 |---|---|

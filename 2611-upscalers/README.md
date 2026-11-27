@@ -6,7 +6,7 @@ Workflows from the JanRT Studio video ([watch on YouTube](YOUTUBE_LINK)), set up
 |---|---|
 | `upscalers_kandinsky.json` | Kandinsky ImageSR 2.0, x4, creativity 4: the portrait from the video. Needs our node pack (below) |
 | `upscalers_steppe_krea2.json` | The official Krea 2 Turbo template with Steppe between KSampler and VAE Decode (inside the subgraph, seed 3). Needs our node pack |
-| `upscalers_seedvr2.json` | The official SeedVR2 7B int8 template, x4, on the old photo from the video. Built in, no custom nodes |
+| `upscalers_seedvr2.json` | The official SeedVR2 7B int8 template, x4, on the old photo from the video, with color correction set to lab. Built in, no custom nodes |
 | `upscalers_kandinsky.png`, `upscalers_steppe_krea2.png`, `upscalers_seedvr2.png` | The result of each; the workflow is saved inside the image. Steppe and SeedVR2 are full size. Kandinsky is shown at 3/4 size to fit GitHub's 25 MB limit; the workflow makes it at the full 3840 x 5120 |
 | `upscalers_portrait.png`, `upscalers_oldscan.png` | The input pictures: put them in ComfyUI's `input` folder |
 
@@ -45,6 +45,7 @@ Workflows from the JanRT Studio video ([watch on YouTube](YOUTUBE_LINK)), set up
 
 - **Steppe 4x:** chain two Steppe Upscale Latent nodes. On illustrations set hff to 0.6 on the second, or flat paint gets grainy. Use VAE Decode (Tiled), or the 4K decode fills 16 GB.
 - **Steppe only takes latents** from its model families, so it can't fix an old photo. Use Kandinsky or SeedVR2 on pictures you already have.
+- **SeedVR2: set color correction to lab** (in the SeedVR2 node). The template ships "none", which leaves colors more saturated and darker than your picture; lab keeps your picture's colors. Our workflow already has lab.
 - **SeedVR2:** skip the 3B model. It over-sharpens.
 - **Kandinsky:** keep the loader on bf16. fp8 saves little on 16 GB and changes the output slightly.
 

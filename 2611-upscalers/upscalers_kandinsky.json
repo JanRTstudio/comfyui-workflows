@@ -1,0 +1,290 @@
+{
+ "id": "4f3cb3f2-79f9-414c-953b-193e34bed646",
+ "revision": 0,
+ "last_node_id": 6,
+ "last_link_id": 4,
+ "nodes": [
+  {
+   "id": 1,
+   "type": "LoadImage",
+   "pos": [
+    0,
+    0
+   ],
+   "size": [
+    360,
+    430
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      2
+     ]
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": null
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage"
+   },
+   "widgets_values": [
+    "upscalers_portrait.png",
+    "image"
+   ],
+   "widgets_values_named": {
+    "image": "upscalers_portrait.png",
+    "upload": "image"
+   }
+  },
+  {
+   "id": 2,
+   "type": "JanRTKandinskySRLoader",
+   "pos": [
+    0,
+    490
+   ],
+   "size": [
+    360,
+    130
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "sr_model",
+     "type": "KANDINSKY_SR",
+     "links": [
+      3
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "JanRTKandinskySRLoader"
+   },
+   "widgets_values": [
+    "Kandinsky-ImageSR-2.0",
+    "first load",
+    "bf16 (as released)"
+   ],
+   "widgets_values_named": {
+    "release": "Kandinsky-ImageSR-2.0",
+    "verify": "first load",
+    "weight_dtype": "bf16 (as released)"
+   }
+  },
+  {
+   "id": 3,
+   "type": "VAELoader",
+   "pos": [
+    0,
+    670
+   ],
+   "size": [
+    360,
+    90
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      4
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAELoader"
+   },
+   "widgets_values": [
+    "ae.safetensors"
+   ],
+   "widgets_values_named": {
+    "vae_name": "ae.safetensors"
+   }
+  },
+  {
+   "id": 4,
+   "type": "JanRTKandinskySRUpscale",
+   "pos": [
+    460,
+    300
+   ],
+   "size": [
+    360,
+    210
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "sr_model",
+     "type": "KANDINSKY_SR",
+     "link": 3
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 4
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 2
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "slot_index": 0,
+     "links": [
+      1
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "JanRTKandinskySRUpscale"
+   },
+   "widgets_values": [
+    "4",
+    4,
+    0.25,
+    1
+   ],
+   "widgets_values_named": {
+    "upscale_factor": "4",
+    "creativity": 4,
+    "overlap": 0.25,
+    "tile_batch_size": 1
+   }
+  },
+  {
+   "id": 5,
+   "type": "SaveImage",
+   "pos": [
+    920,
+    0
+   ],
+   "size": [
+    560,
+    780
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 1
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": null
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "SaveImage"
+   },
+   "widgets_values": [
+    "janrt_upscalers/kandinsky"
+   ],
+   "widgets_values_named": {
+    "filename_prefix": "janrt_upscalers/kandinsky"
+   }
+  },
+  {
+   "id": 6,
+   "type": "MarkdownNote",
+   "pos": [
+    0,
+    -490
+   ],
+   "size": [
+    620,
+    400
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "How to use (JanRT Studio)",
+   "properties": {},
+   "widgets_values": [
+    "## Kandinsky ImageSR 2.0: x4 (JanRT Studio)\nNeeds our node pack **ComfyUI-JanRT-Upscalers** (v0.1.0) and its weights: see the README.\nupscalers_portrait.png gives the result in the video.\n\n1. **Load your picture** (Load Image). Any picture: it works on pixels.\n2. **upscale_factor** 2 or 4. x4 of a 960x1280 picture takes about 43 s on a 16 GB card (the first load checks the weights, about 10 s more).\n3. **creativity**: 0 stays closest to your picture, 8 redraws the most. On real faces keep it at 0 to 4.\n4. **Keep the loader on bf16.** fp8 saves little on 16 GB."
+   ],
+   "widgets_values_named": {
+    "text": "## Kandinsky ImageSR 2.0: x4 (JanRT Studio)\nNeeds our node pack **ComfyUI-JanRT-Upscalers** (v0.1.0) and its weights: see the README.\nupscalers_portrait.png gives the result in the video.\n\n1. **Load your picture** (Load Image). Any picture: it works on pixels.\n2. **upscale_factor** 2 or 4. x4 of a 960x1280 picture takes about 43 s on a 16 GB card (the first load checks the weights, about 10 s more).\n3. **creativity**: 0 stays closest to your picture, 8 redraws the most. On real faces keep it at 0 to 4.\n4. **Keep the loader on bf16.** fp8 saves little on 16 GB."
+   },
+   "color": "#222",
+   "bgcolor": "#000"
+  }
+ ],
+ "links": [
+  [
+   1,
+   4,
+   0,
+   5,
+   0,
+   "IMAGE"
+  ],
+  [
+   2,
+   1,
+   0,
+   4,
+   2,
+   "IMAGE"
+  ],
+  [
+   3,
+   2,
+   0,
+   4,
+   0,
+   "KANDINSKY_SR"
+  ],
+  [
+   4,
+   3,
+   0,
+   4,
+   1,
+   "VAE"
+  ]
+ ],
+ "groups": [],
+ "config": {},
+ "extra": {
+  "ds": {
+   "scale": 0.96,
+   "offset": [
+    260,
+    187.5
+   ]
+  },
+  "frontendVersion": "1.59.11"
+ },
+ "version": 0.4
+}
